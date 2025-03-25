@@ -198,7 +198,7 @@ The ETL jobs runs history information will be available under job run monitoring
 ---
 
 ## 📄 Project Description
-This project performs a descriptive analysis on the City of Vancouver’s business license dataset, specifically filtered for the business type “Caterer”. The analysis aims to derive insights on how business license statuses, issuance patterns, and employee distributions vary across locations and time periods. Data profiling, cleaning, cataloging, and summarization were carried out using AWS tools to prepare the dataset for meaningful interpretation.
+This project performs a descriptive analysis on the City of Vancouver’s business license dataset, specifically filtered for the business type “Caterer”. The analysis aims to derive insights on how business license statuses, issuance patterns, and employee distributions vary across locations and time periods. Data ingestion, profiling, cleaning, cataloging, and summarization were carried out using AWS tools to prepare the dataset for meaningful interpretation.
 
 ---
 
@@ -208,7 +208,7 @@ Business License Descriptive Analysis – Business Type "Caterers"
 ---
 
 ## 🚀 Objective
-To explore and analyze the distribution, status, and characteristics of business licenses categorized under “Caterer” in the City of Vancouver. The goal is to understand trends over time and across locations.
+To explore and analyze the distribution, status, and characteristics of business licenses categorized under “Caterer” in the City of Vancouver. The goal is to summarize and prepare data to analysis trends over time and across locations.
 
 ---
 ## 📊 Dataset
@@ -437,9 +437,9 @@ The detail monitoring information of the ETL job can be seen as shown below.
 - tt
 
 ---
-# 📊 Course Completion Badge
+# 🏆 Course Completion Badge
 
- 
+[View my AWS Academy Graduate - AWS Academy Cloud Foundations](https://www.credly.com/badges/dde90078-8fcc-4e2e-bb6e-981d6067608c/public_url)
 
 
 ---
@@ -450,8 +450,12 @@ The detail monitoring information of the ETL job can be seen as shown below.
 ---
 
 ## 👤 Author
+
 **Grace Winlett**  
-GitHub: [Gracewinlett](https://github.com/Gracewinlett)
+
+[LinkedIn](https://www.linkedin.com/in/grace-winlett-62262a55/)
+
+[GitHub](https://github.com/Gracewinlett)
 
 ---
 
