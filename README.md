@@ -2,7 +2,7 @@
 
 ---
 
-## 📅 Project Description
+## 📄 Project Description
 This project focuses on performing exploratory data summarization for the Academics Department's Attendance Procedure. The aim is to extract structured academic datasets stored in the S3 bucket which are already cleaned and profiled using DataBrew and then load them into AWS Glue Crawlers to create a Data Catalog. From there, AWS Glue ETL jobs are used to generate summarized datasets for reporting and performance insights.
 
 ---
@@ -193,14 +193,220 @@ The ETL jobs runs history information will be available under job run monitoring
 - Output files stored in system and user folders under curated S3 bucket
 
 ---
+# 🎯 Descriptive Analysis
 
+---
+
+## 📄 Project Description
+This project performs a descriptive analysis on the City of Vancouver’s business license dataset, specifically filtered for the business type “Caterer”. The analysis aims to derive insights on how business license statuses, issuance patterns, and employee distributions vary across locations and time periods. Data profiling, cleaning, cataloging, and summarization were carried out using AWS tools to prepare the dataset for meaningful interpretation.
+
+---
+
+## 🏷️ Project Title
+Business License Descriptive Analysis – Business Type "Caterers"
+
+---
+
+## 🚀 Objective
+To explore and analyze the distribution, status, and characteristics of business licenses categorized under “Caterer” in the City of Vancouver. The goal is to understand trends over time and across locations.
+
+---
+## 📊 Dataset
+- **Source**: [City of Vancouver Open Data Portal](https://opendata.vancouver.ca/explore/dataset/business-licences/information/)
+- **Theme**: Business and Economy
+- **Filter Applied**: BusinessType = Caterer
+- **Total Records**: 485
+- **Extracted on**: February 24, 2025
+- **Columns**: FolderYear, LicenceRSN, LicenceNumber, Status, IssuedDate, ExpiredDate, City, LocalArea, NumberOfEmployees, FeePaid, etc.
+
+---
+
+## ⚙️ Methodology
+
+Below figure is the overall architecture of the Data Analysis Platform using AWS for this descriptive analysis.
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/bdfd246e94bb2d4bf8d09dc8f0606973641f5d8a/images/2.1.png)
+
+
+### 1. Data Ingestion
+Downloaded dataset from City of Vancouver Open Data Portal filtered for business type = "Caterer" (Figure 2.1).
+
+Uploaded the raw dataset (CSV) into the Amazon S3 raw bucket at:
+/businesseconomy/business-license/year=2025/quarter=01/month=02/day=24/server=BGVS-Twl
+(Figure 2.2).
+
+### 2. Data Profiling
+Used AWS Glue DataBrew to create a profile job for raw dataset to assess data completeness and identify anomalies (Figure 2.4).
+
+Job results and profiling logs were stored back in S3 (Figures 2.5 and 2.6).
+
+### 3. Data Cleaning
+Created a cleaning recipe in AWS Glue DataBrew (Figure 2.7).
+
+Tasks included:
+
+Trimming white spaces from multiple fields.
+
+Replacing "British Columbia" with "BC".
+
+Filling missing dates with “1111-11-11”.
+
+Imputing missing FeePaid with the most frequent value.
+
+Assigning “Hidden” to missing LocalArea fields.
+
+Outputs stored in both system and user folders in S3 (Figures 2.8, 2.9, 2.10).
+
+### 4. Data Cataloging
+Configured AWS Glue Crawler to crawl transformed data from S3 (Figure 2.11).
+
+Successfully created and verified catalog tables in Glue Data Catalog (Figure 2.12).
+
+### 5. Data Summarization
+Used AWS Glue Visual ETL to create “Business-License-Summarization” job (Figure 2.13).
+
+- Extracted from data catalog.
+- Dropped unused columns.
+- Filtered relevant statuses (Issued, Inactive, etc.).
+- Grouped by status, city, localarea, and issued year.
+- Aggregated count of distinct License RSN, average employees, and average fees.
+- Appended Report_Date field and converted to local time zone.
+- Loaded to both system and user folders in the curated S3 bucket (Figures 2.17, 2.18).
+- Created a summarized output schema and cataloged it in AWS Glue (Figures 2.15, 2.16).
+
+
+
+
+
+![image]()
+
+
+---
+## 🛠️ Tools and Technologies
+- Amazon S3 – data storage
+- AWS Glue DataBrew - Profiling, Cleaning
+- AWS Glue Crawlers – Cataloging structured datasets
+- AWS Glue ETL – Data transformation and summarization
+- AWS Glue Data Catalog – Central metadata repository
+- Amazon Athena – Future querying and analysis (not in scope here)
+
+---
+
+## 📦 Deliverables
+- Cleaned and structured dataset in S3
+- Data profiling and transformation recipe (Glue DataBrew)
+- Summarized license metrics stored in system/user folders
+- AWS Glue ETL job for data summarization
+- Catalog tables 
+
+---
+# 🔄 Data Wrangling
+
+---
+
+## 📄 Project Description
+
+---
+
+## 🏷️ Project Title
 
 
 ---
 
+## 🎯 Objective
+
+---
+## 🧠 Background
+
+
+---
+## 🗂️ Dataset
+
 
 ---
 
+## ⚙️ Methodology
+
+
+
+### 1. Data Cataloging
+
+![image]()
+
+
+---
+## 🧰 Tools and Technologies
+- Amazon S3 – transformed and curated data storage
+- AWS Glue Crawlers – Cataloging structured datasets
+- AWS Glue ETL – Data transformation and summarization
+- AWS Glue Data Catalog – Central metadata repository
+- Amazon Athena – Future querying and analysis (not in scope here)
+
+---
+
+## 📦 Deliverables
+- tt
+
+---
+## 📆 Timeline
+- tt
+
+---
+# 📊 Data Quality Control
+ 
+
+---
+
+## 📄 Project Description
+
+---
+
+## 🏷️ Project Title
+
+
+---
+
+## 🚀 Objective
+
+
+---
+## 📊 Background
+
+---
+## 📌 Scope
+
+---
+
+## ⚙️ Methodology
+
+
+
+### 1. Data Cataloging
+
+![image]()
+
+
+---
+## 🧰 Tools and Technologies
+- Amazon S3 – transformed and curated data storage
+- AWS Glue Crawlers – Cataloging structured datasets
+- AWS Glue ETL – Data transformation and summarization
+- AWS Glue Data Catalog – Central metadata repository
+- Amazon Athena – Future querying and analysis (not in scope here)
+
+---
+
+## 📦 Deliverables
+- tt
+
+---
+## 📆 Timeline
+- tt
+
+---
+# 📊 Course Completion Badge
+
+ 
 
 
 ---
