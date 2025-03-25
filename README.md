@@ -333,56 +333,98 @@ The detail monitoring information of the ETL job can be seen as shown below.
 - Summarized license metrics stored in system/user folders
 
 ---
-# 🔄 Data Wrangling
+# 🧹 Data Wrangling
 
 ---
 
 ## 📄 Project Description
+This project focuses on data wrangling for the Academics Department - Attendance Procedure. The goal is to clean, prepare, and structure raw academic data to ensure its quality and usability for downstream analytics such as descriptive analysis and reporting.
 
 ---
 
 ## 🏷️ Project Title
-
+Academic Attendance Data Wrangling and Transformation
 
 ---
 
 ## 🎯 Objective
+To perform comprehensive data profiling, cleaning, and transformation using AWS Glue DataBrew and AWS Glue ETL jobs to ensure consistency, completeness, and structure for analytical processes.
 
 ---
 ## 🧠 Background
-
+The university’s Academics Department collects various datasets, including student, attendance, course details, instructor information, and program metadata. These datasets contain inconsistencies such as whitespace, missing values, and mixed formatting that need to be standardized for quality analytics.
 
 ---
 ## 🗂️ Dataset
+- Student List
+- Attendance List
+- Instructor List
+- Program List
+- Course List
 
+Each dataset contains 50 rows including string, date and integer types. They are uploaded to Amazon S3 raw bucket.
 
 ---
 
 ## ⚙️ Methodology
 
+Below is the architecture diagram of Data Wrangling using AWS components.
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/3db7f79e346189bb93a2f19167910d4e1a6002c4/images/3.1.png)
 
+### 1. Data Ingestion
+Datasets are uploaded to S3 raw bucket to start transformation.  
 
-### 1. Data Cataloging
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/f51cfbe0b150ec1b884af94ef76ac68d5478a63d/images/3.1.1.png)
 
-![image]()
+### 2. Data Profiling
+Used AWS Glue DataBrew to analyze structure, missing values, and data types.  
+Create profiling jobs for each raw dataset to get the profile.
 
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/9042c2bd270f775de2b154fe3e30fc37cca36eed/images/3.2.png)
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/9042c2bd270f775de2b154fe3e30fc37cca36eed/images/3.3.png)
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/9042c2bd270f775de2b154fe3e30fc37cca36eed/images/3.4.png)
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/9042c2bd270f775de2b154fe3e30fc37cca36eed/images/3.5.png)
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/9042c2bd270f775de2b154fe3e30fc37cca36eed/images/3.6.png)
+
+All the profile jobs are successfully run and profiles are uploaded.
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/9042c2bd270f775de2b154fe3e30fc37cca36eed/images/3.6.1.png)
+
+### 3. Recipe Creation & Data Cleaning
+Created cleaning recipes for each dataset to:
+   - Remove whitespace
+   - Replace missing values
+   - formate the date values to yyyy-mm-dd
+   - Standardize columns formats
+All receipes jobs are successfully run as shown in figure.
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/9042c2bd270f775de2b154fe3e30fc37cca36eed/images/3.7.png)
+
+### 4. Data Storage
+Outputs stored in both system (parquet format with snappy compression) and user(csv format) folders in S3 transformed bucket.
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/44eb6a5da5fb8fa6120b85b9483ac370bda19605/images/3.8.png)
 
 ---
 ## 🛠️ Tools and Technologies
-- Amazon S3 – transformed and curated data storage
-- AWS Glue Crawlers – Cataloging structured datasets
-- AWS Glue ETL – Data transformation and summarization
-- AWS Glue Data Catalog – Central metadata repository
-- Amazon Athena – Future querying and analysis (not in scope here)
+- AWS S3 (raw and transformed)
+- AWS Glue DataBrew (Data profiling and Cleaning)
 
 ---
 
 ## 📦 Deliverables
-- tt
+- Cleaned high quality datasets stored in transformed S3 bucket
 
 ---
-## 📆 Timeline
-- tt
+## ⏳ Timeline
+| Task | Duration |
+|------|----------|
+| Data Profiling | 30 mins |
+| Cleaning Recipe Setup | 60 mins |
+| Recipe Job Execution | 20 mins |
 
 ---
 # 📊 Data Quality Control
