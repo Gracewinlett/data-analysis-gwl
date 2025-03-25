@@ -178,7 +178,7 @@ The ETL jobs runs history information will be available under job run monitoring
 ![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/62b912a5482b826de8d898fe99ac40625049a5d1/images/1.19.png)
 
 ---
-## 🧰 Tools and Technologies
+## 🛠️ Tools and Technologies
 - Amazon S3 – transformed and curated data storage
 - AWS Glue Crawlers – Cataloging structured datasets
 - AWS Glue ETL – Data transformation and summarization
@@ -368,7 +368,7 @@ The detail monitoring information of the ETL job can be seen as shown below.
 
 
 ---
-## 🧰 Tools and Technologies
+## 🛠️ Tools and Technologies
 - Amazon S3 – transformed and curated data storage
 - AWS Glue Crawlers – Cataloging structured datasets
 - AWS Glue ETL – Data transformation and summarization
@@ -420,7 +420,7 @@ The detail monitoring information of the ETL job can be seen as shown below.
 
 
 ---
-## 🧰 Tools and Technologies
+## 🛠️ Tools and Technologies
 - Amazon S3 – transformed and curated data storage
 - AWS Glue Crawlers – Cataloging structured datasets
 - AWS Glue ETL – Data transformation and summarization
@@ -436,20 +436,20 @@ The detail monitoring information of the ETL job can be seen as shown below.
 ## 📆 Timeline
 - tt
 
+
+---
+
+# 📃 References
+- AWS Academy. (2022). *AWS Academy Cloud Foundations*. Retrieved from https://awsacademy.instructure.com/courses/106917/modules
+- 
 ---
 # 🏆 Course Completion Badge
 
 [View my AWS Academy Graduate - AWS Academy Cloud Foundations](https://www.credly.com/badges/dde90078-8fcc-4e2e-bb6e-981d6067608c/public_url)
 
-
 ---
 
-## 📃 References
-- AWS Academy. (2022). *AWS Academy Cloud Foundations*. Retrieved from https://awsacademy.instructure.com/courses/106917/modules
-
----
-
-## 👤 Author
+# 👤 Author
 
 **Grace Winlett**  
 
