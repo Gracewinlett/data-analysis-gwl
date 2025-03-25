@@ -513,7 +513,7 @@ Create CloudTrail to keep track of all the activities so that events can continu
 
 # 📃 References
 - AWS Academy. (2022). *AWS Academy Cloud Foundations*. Retrieved from https://awsacademy.instructure.com/courses/106917/modules
-- 
+
 ---
 # 🏆 Course Completion Badge
 
