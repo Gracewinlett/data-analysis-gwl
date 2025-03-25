@@ -33,7 +33,7 @@ The Attendance datasets consist of below tables
 ## ⚙️ Methodology
 
 Below figure shows that overall architecture of the Data Analysis Platform using AWS for Academics Office.
-![image](https://github.com/user-attachments/assets/c6dec236-e242-4a71-a8b4-97fc6f0ce172)
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/37eca5856c64a2d47ca78a9993c5fe89ac64785b/images/1.1.png)
 
 ---
 ## 🧰 Tools and Technologies
