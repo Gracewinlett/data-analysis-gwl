@@ -461,7 +461,7 @@ Raw datasets often include inconsistent, missing, or outdated values, which can 
 
 Below is the architecture diagram including monitoring using AWS components.
 
-![image]()
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/2b5459252219af34896599c2900105975bac6753/images/4.1.png)
 
 ### 1. Build ETL Job for Data Quality Checks
 An ETL job named bue-bul-QC-Twl was implemented using AWS Glue as below.
@@ -474,19 +474,19 @@ An ETL job named bue-bul-QC-Twl was implemented using AWS Glue as below.
 - Route rows: Use a conditional router to separate Passed and Failed data.
 - Transform & Load: Store results into separate folders.
 
-![image]()
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/68c7577c86a5413f10bd9ed136c663caf6a2863d/images/4.2.png)
 
 ### 2. Store Quality Results
 Passed and Failed results in csv format are saved into corresponding folders in the S3 transformed bucket.
 
-![image]()
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/68c7577c86a5413f10bd9ed136c663caf6a2863d/images/4.3.png)
 
-![image]()
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/68c7577c86a5413f10bd9ed136c663caf6a2863d/images/4.4.png)
 
 ### Monitoring
 Create CloudTrail to keep track of all the activities so that events can continuously capture in the log and are easy to trace back in case anything happens.
 
-![image]()
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/68c7577c86a5413f10bd9ed136c663caf6a2863d/images/4.5.png)
 
 ---
 ## 🛠️ Tools and Technologies
@@ -500,6 +500,7 @@ Create CloudTrail to keep track of all the activities so that events can continu
 ## 📦 Deliverables
 - AWS Glue ETL Job (bue-bul-QC-Twl)
 - Data stored in Passed and Failed folders in S3 transformed bucket
+- Activities Log from CloudTrail
 
 ---
 ## 📆 Timeline
@@ -507,7 +508,6 @@ Create CloudTrail to keep track of all the activities so that events can continu
 |------|----------|
 | Build ETL job | 60 mins |
 | ETL Job Execution | 10 mins |
-
 
 ---
 
