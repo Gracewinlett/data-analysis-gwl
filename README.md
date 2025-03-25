@@ -427,56 +427,86 @@ Outputs stored in both system (parquet format with snappy compression) and user(
 | Recipe Job Execution | 20 mins |
 
 ---
-# 📊 Data Quality Control
- 
+# 📊 Data Quality Control 
 
 ---
 
 ## 📄 Project Description
+This project focuses on applying data quality checks to the business license dataset from the City of Vancouver using AWS Glue ETL. The objective is to ensure the data is clean, complete, and trustworthy before further analysis.
 
 ---
 
 ## 🏷️ Project Title
-
+Data Quality Control for Business License Dataset for Business Type "Caterers" – City of Vancouver
 
 ---
 
 ## 🚀 Objective
-
+To validate, clean, and assess the quality of the business license dataset by applying completeness, uniqueness, and freshness checks using AWS Glue ETL jobs and store the results into separate "Passed" and "Failed" folders for further action.
 
 ---
-## 📊 Background
+## 🧠 Background
+Raw datasets often include inconsistent, missing, or outdated values, which can impact the accuracy of downstream analytics. To address this, the Data Analysis Platform includes a dedicated data quality control phase to validate key quality dimensions and support reprocessing or clean storage.
 
 ---
 ## 📌 Scope
+- Validate data completeness for key fields such as FOLDERYEAR and LicenceRSN.
+- Check the uniqueness of the primary key LicenceRSN.
+- Ensure issued license dates are within the last 365 days for data freshness.
+- Store passed and failed records into designated S3 folders for review and processing.
 
 ---
 
 ## ⚙️ Methodology
 
-
-
-### 1. Data Cataloging
+Below is the architecture diagram including monitoring using AWS components.
 
 ![image]()
 
+### 1. Build ETL Job for Data Quality Checks
+An ETL job named bue-bul-QC-Twl was implemented using AWS Glue as below.
+
+- Load Data: Load data from the S3 bucket.
+- Custom Transform: Apply data quality rules.
+  - Completeness: Ensure FOLDERYEAR and LicenceRSN > 0
+  - Uniqueness: Ensure LicenceRSN is unique
+  - Freshness: Ensure IssuedDate is less than 365 days from the current date
+- Route rows: Use a conditional router to separate Passed and Failed data.
+- Transform & Load: Store results into separate folders.
+
+![image]()
+
+### 2. Store Quality Results
+Passed and Failed results in csv format are saved into corresponding folders in the S3 transformed bucket.
+
+![image]()
+
+![image]()
+
+### Monitoring
+Create CloudTrail to keep track of all the activities so that events can continuously capture in the log and are easy to trace back in case anything happens.
+
+![image]()
 
 ---
 ## 🛠️ Tools and Technologies
-- Amazon S3 – transformed and curated data storage
-- AWS Glue Crawlers – Cataloging structured datasets
-- AWS Glue ETL – Data transformation and summarization
-- AWS Glue Data Catalog – Central metadata repository
-- Amazon Athena – Future querying and analysis (not in scope here)
+- Amazon S3 – data storage
+- AWS Glue – Visual ETL job creation and execution
+- AWS CloudTrail – Logs activities
+- Parquet + Snappy Compression – Efficient storage format for optimized I/O
 
 ---
 
 ## 📦 Deliverables
-- tt
+- AWS Glue ETL Job (bue-bul-QC-Twl)
+- Data stored in Passed and Failed folders in S3 transformed bucket
 
 ---
 ## 📆 Timeline
-- tt
+| Task | Duration |
+|------|----------|
+| Build ETL job | 60 mins |
+| ETL Job Execution | 10 mins |
 
 
 ---
