@@ -229,57 +229,90 @@ Below figure is the overall architecture of the Data Analysis Platform using AWS
 
 
 ### 1. Data Ingestion
-Downloaded dataset from City of Vancouver Open Data Portal filtered for business type = "Caterer" (Figure 2.1).
+Downloaded dataset from City of Vancouver Open Data Portal filtered for business type = "Caterer".
 
 Uploaded the raw dataset (CSV) into the Amazon S3 raw bucket at:
-/businesseconomy/business-license/year=2025/quarter=01/month=02/day=24/server=BGVS-Twl
-(Figure 2.2).
+/businesseconomy/business-license/year=2025/quarter=01/month=02/day=24/server=BGVS-Twl.
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.2.png)
+
+Another S3 bucket created to store data for data transformation. 
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.3.png)
 
 ### 2. Data Profiling
-Used AWS Glue DataBrew to create a profile job for raw dataset to assess data completeness and identify anomalies (Figure 2.4).
+Used AWS Glue DataBrew to create a profile job for raw dataset to assess data completeness and identify anomalies. Using that, upload dataset to transform S3 bucket and then create a data profiling job as shown in figure.
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.4.png)
 
-Job results and profiling logs were stored back in S3 (Figures 2.5 and 2.6).
+Job result has generated as shown in below and profiling logs were stored back in S3 transformed bucket.
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.5.png)
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.6.png)
 
 ### 3. Data Cleaning
-Created a cleaning recipe in AWS Glue DataBrew (Figure 2.7).
+Data Cleaning is needed to make sure the dataset is structured, accurate, and usable for analysis. Created a cleaning recipe in AWS Glue DataBrew.
 
 Tasks included:
+- Remove white spaces from BusinessName, LicenceNumber, BusinessTradeName, Status,	BusinessType, BusinessSubType,	Unit,	UnitType,	Street,	City,	Province,	Country,	PostalCode, LocalArea.
+- Replace text British Columbia with BC in Province
+- Fill missing values with "1111-11-11" in IssuedDate and ExpiredDate
+- Fill missing values with most frequent value in FeePaid
+- Fill missing values with "Hidden" in LocalArea
+  
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.7.png)
 
-Trimming white spaces from multiple fields.
+The result of the receipe job will be shown as below.
 
-Replacing "British Columbia" with "BC".
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.8.png)
 
-Filling missing dates with “1111-11-11”.
+Outputs stored in both system and user folders in S3 transformed bucket.
 
-Imputing missing FeePaid with the most frequent value.
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.9.png)
 
-Assigning “Hidden” to missing LocalArea fields.
-
-Outputs stored in both system and user folders in S3 (Figures 2.8, 2.9, 2.10).
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.10.png)
 
 ### 4. Data Cataloging
-Configured AWS Glue Crawler to crawl transformed data from S3 (Figure 2.11).
+Configured AWS Glue Crawler to crawl transformed data from S3 to catalog the cleaned structured data.
 
-Successfully created and verified catalog tables in Glue Data Catalog (Figure 2.12).
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.11.png)
+
+Successfully created and verified catalog tables in Glue Data Catalog.
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.12.png)
 
 ### 5. Data Summarization
-Used AWS Glue Visual ETL to create “Business-License-Summarization” job (Figure 2.13).
+Used AWS Glue Visual ETL to create “Business-License-Summarization” job to summarize and prepare the data for analysis.
 
 - Extracted from data catalog.
-- Dropped unused columns.
-- Filtered relevant statuses (Issued, Inactive, etc.).
-- Grouped by status, city, localarea, and issued year.
-- Aggregated count of distinct License RSN, average employees, and average fees.
-- Appended Report_Date field and converted to local time zone.
-- Loaded to both system and user folders in the curated S3 bucket (Figures 2.17, 2.18).
-- Created a summarized output schema and cataloged it in AWS Glue (Figures 2.15, 2.16).
+- Transform scheme by dropping unnecessary columns (Licencerevisionnumber, Businesstradename,	Businesstype,	Businesssubtype,	Unit,	Unittype,	House,	Province,	Country,	Postalcode)
+- Transform - Filter data by status which matched the status (Gone Out of Business, Inactive,	Issued, Pending)
+- Transform date to year for license Issued date
+- Transform data
+  - Grouped by status, city, localarea, and issued year.
+  - Aggregated count of distinct License RSN, average employees, and average fees.
+- Transform - add Report_Date to summary
+- Transform - convert to Report_Date_LTZ
+- Transform - prepare for load, remove Report_Date column
+- Data target - load to system (parquet format, snappy compression)
+- Transform - convert to one file
+- Data target - load to user (csv)
 
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.13.png)
 
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.14.png)
 
+After successfully running ETL job, the metrics table for summarized result will be stored under Data catalog as shown in below figures. 
 
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.15.png)
 
-![image]()
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.16.png)
 
+The summarized data will be stored under the system and user folders of curator S3 bucket.
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.17.png)
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.18.png)
+
+The detail monitoring information of the ETL job can be seen as shown below.
+
+![image](https://github.com/Gracewinlett/data-analysis-gwl/blob/7cd1456c72e35120c85129260c7ce86bc550815f/images/2.19.png)
 
 ---
 ## 🛠️ Tools and Technologies
@@ -295,9 +328,9 @@ Used AWS Glue Visual ETL to create “Business-License-Summarization” job (Fig
 ## 📦 Deliverables
 - Cleaned and structured dataset in S3
 - Data profiling and transformation recipe (Glue DataBrew)
-- Summarized license metrics stored in system/user folders
+- Catalog tables
 - AWS Glue ETL job for data summarization
-- Catalog tables 
+- Summarized license metrics stored in system/user folders
 
 ---
 # 🔄 Data Wrangling
